@@ -45,7 +45,7 @@ If you are designing an experiment, all experiment files should go in the `exper
 The `analysis` folder should be used for keeping all your code and Jupyter notebooks.  
 1. **This folder must contain a `requirements.txt` file.** This file keeps track of all the Python packages and their versions that you use in your analysis.
 2. Keep this file updated by regularly running `pip freeze > requirements.txt`
-3. You can create a `scratch` branch or other branches for working if you want or need.
+3. Create your own branch from the `analysis-template` branch for all your analysis. Only final scripts and notebooks can be copied to the main branch after they are confirmed to work.
 4. Add proper `library` and `notebooks` folders to keep the code organized nicely.
 5. Commit regularly, and **surely when you complete an issue**, and include a proper commit message and description.
 
