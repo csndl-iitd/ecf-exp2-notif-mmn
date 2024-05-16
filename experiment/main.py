@@ -370,9 +370,9 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # Run 'Begin Experiment' code from code
     import random
     # standard_tone
-    standard_tone = r"C:\Users\user\Documents\PRAGYA\experiment1.2\iphone_sound.wav"
+    standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\iphone_sound.wav"
     #deviant_tone  
-    deviant_tone = r"C:\Users\user\Documents\PRAGYA\experiment1.2\bing.wav"
+    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\bing.wav"
     def gen_rnd(start, end,total_trail):
         while(1):
             random_numbers = np.random.randint(start, end, 150)
@@ -395,7 +395,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     tones = MMN_stimuli(900,deviant_tone,standard_tone)
     movie = visual.MovieStim(
         win, name='movie',
-        filename='C:/Users/user/Documents/PRAGYA/experiment1.2/SAND ART _Return to Yourself_ by Kseniya Simonova.mp4', movieLib='ffpyplayer',
+        filename='E:\ecf-exp2-notif-mmn\experiment/vedio/SAND ART _Return to Yourself_ by Kseniya Simonova.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
         pos=(0, 0), size=(1.5,1), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
@@ -430,7 +430,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     tones_DT = MMN_stimuli(900,standard_tone,deviant_tone)
     movie_2 = visual.MovieStim(
         win, name='movie_2',
-        filename='C:/Users/user/Documents/PRAGYA/experiment1.2/SAND ART _Return to Yourself_ by Kseniya Simonova.mp4', movieLib='ffpyplayer',
+        filename='E:\ecf-exp2-notif-mmn\experiment/vedio/SAND ART _Return to Yourself_ by Kseniya Simonova.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
         pos=(0, 0), size=(1.5,1), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
