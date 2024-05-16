@@ -1,7 +1,7 @@
 # Protocol
 
 ## Before the experiment
-1. Book an experiment slot lab based on subject availablity.
+1. Book an experiment slot in lab based on subject availablity.
 2. Ask subject to come with clean(shampoo) and dry hair (if possible to small hair).Also ask subject to have a sufficient sleep. Do not put oil, conditioner,cream or gel in hair.
 3. Make sure EEG and Emotibit batteries are charged.
 4. Emotibit set up is done.
@@ -9,7 +9,7 @@
 
 ### Questionnaires
 1. Volunteer sign up form ([link](https://forms.gle/jmp8ZyCySxgnyXV78))
-2. Ask there smartphone notifcation sound tune.
+2. Ask subject's smartphone notifcation sound tune.
 ## Formalities after subject arrives
 
 
@@ -63,6 +63,7 @@ Tell subject to be relax and try to talk to subject and make them comfortable.
 3. Remove the Emotibit, EEG electrodes and the head cap.
 4. Tell subject to clean their head with sampoo. 
 5. Ask their expereince with questions:
+
      a. Do you like the video?
      b. Do you feel the notificationas are annoying?
      c. Do you feel any comfortable during expereiment?
