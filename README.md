@@ -25,7 +25,7 @@
 
 ## Setting up the subject
 
-1. Clean the subject's head scalp with mythil alchocal* and cotton.
+1. Clean the subject's head scalp with Ethanol and cotton.
 2. Measure the head size and put on head cap identifing the Cz loaction.
 3. Put the gel and fix electorde one by one.
 4. Check the impedance and reduce it if required with gel.
