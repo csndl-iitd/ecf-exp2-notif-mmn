@@ -1,34 +1,41 @@
-## Using this repository for experiments
-(Remove this section after the experiment is set up)
-If you are designing an experiment, all experiment files should go in the `experiment` folder. Please follow the following steps:
-1. Create a new branch on Github named `experiment` if it does not already exist. Typically it should exist.
-2. Install `github desktop` on the computer on which the experiment will live, and clone this repository there.
-3. Switch to the `experiment` branch.
-4. Create the experiment directly in the experiment folder of this repository only.
-5. **Every time you update the experiment, commit the changes to git including a short description of what you changed.** You can use github desktop for doing this efficiently.
-
 # Protocol
 
 ## Before the experiment
+1. Book an experiment slot lab based on subject availablity.
+2. Ask subject to come with clean(shampoo) and dry hair (if possible to small hair).Also ask subject to have a sufficient sleep. Do not put oil, conditioner,cream or gel in hair.
+3. Make sure EEG and Emotibit batteries are charged.
+4. Emotibit set up is done.
+5. EEG setup is done.
+
 
 ### Questionnaires
-Any questionnaires to be completed for screening?
+1. Volunteer sign up form ([link](https://forms.gle/jmp8ZyCySxgnyXV78))
 
 ## Formalities after subject arrives
 
+
 ### Paperwork
-1. Explain the experiment
-2. Get Informed Consent signed ([link]())
+1. Explain the experiment 
+2. Get Informed Consent signed ([link](https://forms.gle/aJ5kvoxSobrZo6Ac7))
 
 ### Psychometric questionnaires
-1. STAI ([link](//add link to google form))
-2. Phone use? ([link](//add link to google form))
+1. STAI-Trait ([link](https://forms.gle/TZtn9MCcCk9UxH6N6))
+2. STAI-Trait ([link](https://forms.gle/nisbSXPZvCBnjcoT7))
+3. Phone use? ([link](https://forms.gle/uLqRPdxorPTUgTRN9))
+4. Impulsivity questionnaire([link](https://forms.gle/H7HzP8U7GdBj8rNT9))
 
 ## Setting up the subject
 
-## Setting up the experiment
+1. Clean the subject's head scalp with mythil alchocal* and cotton.
+2. Measure the head size and put on head cap identifing the Cz loaction.
+3. Put the gel and fix electorde one by one.
+4. Check the impedance and reduce it if required with gel.
+5. Put on the emotibit on the hand.
 
-### Things to test / confirm / check
+
+## Setting up the experiment
+ 
+
 
 ## After starting the experiment
 

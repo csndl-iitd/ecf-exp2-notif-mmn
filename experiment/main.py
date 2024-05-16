@@ -81,7 +81,7 @@ markers = {
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 # Store info about the experiment session
 psychopyVersion = '2023.2.3'
-expName = 'final_exp_1.2_v1_18012024'  # from the Builder filename that created this script
+expName = 'main'  # from the Builder filename that created this script
 expInfo = {
     'participant': f"{randint(0, 999999):06.0f}",
     'session': '001',
@@ -150,7 +150,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\user\\Documents\\PRAGYA\\experiment1.2\\psychopy_builder\\final_exp_1.2_v1_1305_2024.py',
+        originPath='E:\\ecf-exp2-notif-mmn\\experiment\\psychopy_builder\\main.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -251,7 +251,7 @@ def setupInputs(expInfo, thisExp, win):
     ioSession = '1'
     if 'session' in expInfo:
         ioSession = str(expInfo['session'])
-    ioServer = io.launchHubServer(window=win, experiment_code='final_exp_1.2_v1_18012024', session_code=ioSession, datastore_name=thisExp.dataFileName, **ioConfig)
+    ioServer = io.launchHubServer(window=win, experiment_code='main', session_code=ioSession, datastore_name=thisExp.dataFileName, **ioConfig)
     eyetracker = None
     
     # create a default keyboard (e.g. to check for escape)
