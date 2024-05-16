@@ -395,7 +395,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     tones = MMN_stimuli(900,deviant_tone,standard_tone)
     movie = visual.MovieStim(
         win, name='movie',
-        filename='E:\ecf-exp2-notif-mmn\experiment/vedio/SAND ART _Return to Yourself_ by Kseniya Simonova.mp4', movieLib='ffpyplayer',
+        filename='E:\ecf-exp2-notif-mmn\experiment/video/SAND ART _Return to Yourself_ by Kseniya Simonova.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
         pos=(0, 0), size=(1.5,1), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
@@ -430,7 +430,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     tones_DT = MMN_stimuli(900,standard_tone,deviant_tone)
     movie_2 = visual.MovieStim(
         win, name='movie_2',
-        filename='E:\ecf-exp2-notif-mmn\experiment/vedio/SAND ART _Return to Yourself_ by Kseniya Simonova.mp4', movieLib='ffpyplayer',
+        filename='E:\ecf-exp2-notif-mmn\experiment/video/SAND ART _Return to Yourself_ by Kseniya Simonova.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
         pos=(0, 0), size=(1.5,1), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
@@ -652,7 +652,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             # if movie is stopping this frame...
             if movie.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > movie.tStartRefresh + 1.3-frameTolerance:
+                if tThisFlipGlobal > movie.tStartRefresh + 1180-frameTolerance:
                     # keep track of stop time/frame for later
                     movie.tStop = t  # not accounting for scr refresh
                     movie.frameNStop = frameN  # exact frame index
@@ -1063,7 +1063,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             # if movie_2 is stopping this frame...
             if movie_2.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > movie_2.tStartRefresh + 1.3-frameTolerance:
+                if tThisFlipGlobal > movie_2.tStartRefresh + 1180-frameTolerance:
                     # keep track of stop time/frame for later
                     movie_2.tStop = t  # not accounting for scr refresh
                     movie_2.frameNStop = frameN  # exact frame index
