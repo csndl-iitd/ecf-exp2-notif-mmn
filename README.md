@@ -9,7 +9,8 @@
 
 ### Questionnaires
 1. Volunteer sign up form ([link](https://forms.gle/jmp8ZyCySxgnyXV78))
-2. Ask there smartphone notifcation sound tune.
+2. STAI-Trait ([link](https://forms.gle/TZtn9MCcCk9UxH6N6))
+3. Ask there smartphone notifcation sound tune.
 ## Formalities after subject arrives
 
 
@@ -18,10 +19,9 @@
 2. Get Informed Consent signed ([link](https://forms.gle/aJ5kvoxSobrZo6Ac7))
 
 ### Psychometric questionnaires
-1. STAI-Trait ([link](https://forms.gle/TZtn9MCcCk9UxH6N6))
-2. STAI-Trait ([link](https://forms.gle/nisbSXPZvCBnjcoT7))
-3. Phone use? ([link](https://forms.gle/uLqRPdxorPTUgTRN9))
-4. Impulsivity questionnaire([link](https://forms.gle/H7HzP8U7GdBj8rNT9))
+1. STAI-state ([link](https://forms.gle/nisbSXPZvCBnjcoT7))
+2. Phone use? ([link](https://forms.gle/uLqRPdxorPTUgTRN9))
+3. Impulsivity questionnaire([link](https://forms.gle/H7HzP8U7GdBj8rNT9))
 
 ## Setting up the subject
 
