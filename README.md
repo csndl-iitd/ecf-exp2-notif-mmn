@@ -62,7 +62,6 @@ Tell subject to be relax and try to talk to subject and make them comfortable.
 2. Ask subject to relax. 
 3. Remove the Emotibit, EEG electrodes and the head cap.
 4. Tell subject to clean their head with sampoo. 
-<<<<<<< HEAD
 5. Ask their expereince with questions:
 
      a. Do you like the video?
