@@ -9,12 +9,8 @@
 
 ### Questionnaires
 1. Volunteer sign up form ([link](https://forms.gle/jmp8ZyCySxgnyXV78))
-<<<<<<< HEAD
-2. Ask subject's smartphone notifcation sound tune.
-=======
 2. STAI-Trait ([link](https://forms.gle/TZtn9MCcCk9UxH6N6))
 3. Ask there smartphone notifcation sound tune.
->>>>>>> 91b49a315e0249f172c44c899b3c6990d91619f2
 ## Formalities after subject arrives
 
 
@@ -73,13 +69,12 @@ Tell subject to be relax and try to talk to subject and make them comfortable.
      b. Do you feel the notificationas are annoying?
      c. Do you feel any comfortable during expereiment?
      d. Any other suggestion or issue that you want to share?
-=======
+
 5. Ask their expereince with questions: \
      a. Do you like the video? \
      b. Do you feel the notificationas are annoying? \
      c. Do you feel any comfortable during expereiment? \
-     d. Any other suggestion or issue that you want to share? \ 
->>>>>>> 91b49a315e0249f172c44c899b3c6990d91619f2
+     d. Any other suggestion or issue that you want to share? 
 
 
 ### Pay and get receipt signed
