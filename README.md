@@ -4,12 +4,17 @@
 1. Book an experiment slot in lab based on subject availablity.
 2. Ask subject to come with clean(shampoo) and dry hair (if possible to small hair).Also ask subject to have a sufficient sleep. Do not put oil, conditioner,cream or gel in hair.
 3. Make sure EEG and Emotibit batteries are charged.
-4. Emotibit set up is done.
-5. EEG setup is done.
+4. Check Emotibit set up.
+5. Check EEG setup .
 
 ### Questionnaires
 1. Volunteer sign up form ([link](https://forms.gle/jmp8ZyCySxgnyXV78))
+<<<<<<< HEAD
 2. Ask subject's smartphone notifcation sound tune.
+=======
+2. STAI-Trait ([link](https://forms.gle/TZtn9MCcCk9UxH6N6))
+3. Ask there smartphone notifcation sound tune.
+>>>>>>> 91b49a315e0249f172c44c899b3c6990d91619f2
 ## Formalities after subject arrives
 
 
@@ -18,14 +23,13 @@
 2. Get Informed Consent signed ([link](https://forms.gle/aJ5kvoxSobrZo6Ac7))
 
 ### Psychometric questionnaires
-1. STAI-Trait ([link](https://forms.gle/TZtn9MCcCk9UxH6N6))
-2. STAI-Trait ([link](https://forms.gle/nisbSXPZvCBnjcoT7))
-3. Phone use? ([link](https://forms.gle/uLqRPdxorPTUgTRN9))
-4. Impulsivity questionnaire([link](https://forms.gle/H7HzP8U7GdBj8rNT9))
+1. STAI-state ([link](https://forms.gle/nisbSXPZvCBnjcoT7))
+2. Phone use? ([link](https://forms.gle/uLqRPdxorPTUgTRN9))
+3. Impulsivity questionnaire([link](https://forms.gle/H7HzP8U7GdBj8rNT9))
 
 ## Setting up the subject
 
-1. Clean the subject's head scalp with mythil alchocal* and cotton.
+1. Clean the subject's head scalp with Ethanol and cotton.
 2. Measure the head size and put on head cap identifing the Cz loaction.
 3. Put the gel and fix electorde one by one.
 4. Check the impedance and reduce it if required with gel.
@@ -62,12 +66,20 @@ Tell subject to be relax and try to talk to subject and make them comfortable.
 2. Ask subject to relax. 
 3. Remove the Emotibit, EEG electrodes and the head cap.
 4. Tell subject to clean their head with sampoo. 
+<<<<<<< HEAD
 5. Ask their expereince with questions:
 
      a. Do you like the video?
      b. Do you feel the notificationas are annoying?
      c. Do you feel any comfortable during expereiment?
      d. Any other suggestion or issue that you want to share?
+=======
+5. Ask their expereince with questions: \
+     a. Do you like the video? \
+     b. Do you feel the notificationas are annoying? \
+     c. Do you feel any comfortable during expereiment? \
+     d. Any other suggestion or issue that you want to share? \ 
+>>>>>>> 91b49a315e0249f172c44c899b3c6990d91619f2
 
 
 ### Pay and get receipt signed
