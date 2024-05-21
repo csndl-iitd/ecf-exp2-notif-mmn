@@ -397,7 +397,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         win, name='movie',
         filename='E:\ecf-exp2-notif-mmn\experiment/video/video1.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
-        pos=(0, 0), size=(1.5,1), units=win.units,
+        pos=(0, 0), size=(1,0.7), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
         depth=-1
     )
@@ -432,7 +432,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         win, name='movie_2',
         filename='E:\ecf-exp2-notif-mmn\experiment/video/video2.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
-        pos=(0, 0), size=(1.5,1), units=win.units,
+        pos=(0, 0), size=(1,0.7), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
         depth=-1
     )
