@@ -370,7 +370,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # Run 'Begin Experiment' code from code
     import random
     # standard_tone
-    standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\dada.wav"
+    standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\beep.wav"
     #deviant_tone  
     deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\bing.wav"
     def gen_rnd(start, end,total_trail):
