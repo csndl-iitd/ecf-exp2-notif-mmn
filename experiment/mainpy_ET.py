@@ -18,7 +18,7 @@ from psychopy import plugins
 plugins.activatePlugins()
 prefs.hardware['audioLib'] = 'ptb'
 prefs.hardware['audioLatencyMode'] = '3'
-from psychopy import sound, gui, visual, core, data, event, logging, clock, colors, layout, iohub, hardware
+from psychopy import sound, gui, visual, core, data, event, logging, clock, colors, layout, iohub, hardware,monitors
 from psychopy.tools import environmenttools
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER, priority)
@@ -33,6 +33,98 @@ import sys  # to get file system encoding
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
 from pylsl import StreamInfo, StreamOutlet
+from titta import Titta, helpers_tobii as helpers
+import datetime
+
+
+######## ET #######
+bimonocular_calibration = False
+dual_screen_setup = False
+
+# %%  Monitor/geometry
+MY_MONITOR = 'testMonitor'  # needs to exists in PsychoPy monitor center
+FULLSCREEN = True
+SCREEN_RES = [1920, 1080]
+SCREEN_WIDTH = 52.7  # cm
+VIEWING_DIST = 63  # distance from eye to center of screen (cm)
+
+monitor_refresh_rate = 60  # frames per second (fps)
+mon = monitors.Monitor(MY_MONITOR)  # Defined in defaults file
+mon.setWidth(SCREEN_WIDTH)          # Width of screen (cm)
+mon.setDistance(VIEWING_DIST)       # Distance eye / monitor (cm)
+mon.setSizePix(SCREEN_RES)
+
+if dual_screen_setup:
+    # Monitor/geometry operator screen
+    MY_MONITOR_OP                  = 'default' # needs to exists in PsychoPy monitor center
+    FULLSCREEN_OP                  = False
+    SCREEN_RES_OP                  = [1920, 1080]
+    SCREEN_WIDTH_OP                = 52.7 # cm
+    VIEWING_DIST_OP                = 63 #  # distance from eye to center of screen (cm)
+
+    mon_op = monitors.Monitor(MY_MONITOR_OP)  # Defined in defaults file
+    mon_op.setWidth(SCREEN_WIDTH_OP)          # Width of screen (cm)
+    mon_op.setDistance(VIEWING_DIST_OP)       # Distance eye / monitor (cm)
+    mon_op.setSizePix(SCREEN_RES_OP)
+    
+    
+    
+# %%  ET settings
+my_et_name = 'Tobii Pro Fusion'
+# my_et_name = 'IS4_Large_Peripheral'
+# my_et_name = 'Tobii Pro Nano'
+
+# Change any of the default dettings?e
+my_et_settings = Titta.get_defaults(my_et_name)
+my_et_settings.N_CAL_TARGETS = 5
+my_et_settings.DEBUG = False
+
+def titta_init(fname, win, win_op=None):
+    my_et_settings.FILENAME = fname#data.getDateStr()
+    # %% Connect to eye tracker and calibrate
+    my_tracker = Titta.Connect(my_et_settings)
+    my_tracker.init()
+
+    fixation_point = helpers.MyDot2(win)
+    
+    #  Calibrate
+    if bimonocular_calibration:
+        if dual_screen_setup:
+            my_tracker.calibrate(win, win_operator=win_op, eye='left', calibration_number = 'first')
+            my_tracker.calibrate(win, win_operator=win_op, eye='right', calibration_number = 'second')
+        else:
+            my_tracker.calibrate(win, eye='left', calibration_number='first')
+            my_tracker.calibrate(win, eye='right', calibration_number='second')
+    else:
+        if dual_screen_setup:
+            my_tracker.calibrate(win, win_operator=win_op)
+        else:
+            my_tracker.calibrate(win)
+     
+    # %% Record some data. Normally only gaze stream is started
+    my_tracker.start_recording(gaze=True,
+                            time_sync=True,
+                            eye_image=False,
+                            notifications=False,
+                            external_signal=False,
+                            positioning=False)
+
+    # Present fixation dot and wait for one second
+#    for i in range(monitor_refresh_rate):
+#        fixation_point.draw()
+#        t = win.flip()
+    return my_tracker
+
+def titta_end(my_tracker):
+    # Stop streams (if available). Normally only gaze stream is stopped
+    my_tracker.stop_recording(gaze=True,
+                            time_sync=True,
+                            eye_image=False,
+                            notifications=False,
+                            external_signal=False,
+                            positioning=False)
+    my_tracker.save_data()
+    return
 
 # Set up LabStreamingLayer stream.
 info = StreamInfo(name='DataSyncMarker', type='Markers', channel_count=1,
@@ -335,6 +427,12 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     thisSession : psychopy.session.Session or None
         Handle of the Session object this experiment is being run from, if any.
     """
+    def tobii_sync():
+        time = my_tracker.get_system_time_stamp()
+        lsl_local_time = pylsl.local_clock()
+        thisExp.addData('TobiiTime', time)
+        thisExp.addData('PsychopyTime', globalClock.getTime())
+        thisExp.addData('local_time', lsl_local_time )
     # mark experiment as started
     thisExp.status = STARTED
     # make sure variables created by exec are available globally
@@ -467,7 +565,8 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # Run 'Begin Routine' code from code_3
     #port.write(bytes(markers['B1_baseline_start']))
     outlet.push_sample(markers['B1_baseline_start'])
-    my_eeg_trigger(markers['B1_baseline_start'][0]) 
+    my_eeg_trigger(markers['B1_baseline_start'][0])
+    tobii_sync()
     
     # keep track of which components have finished
     StartComponents = [welcome]
@@ -1323,7 +1422,7 @@ def endExperiment(thisExp, inputs=None, win=None):
     logging.flush()
 
 
-def quit(thisExp, win=None, inputs=None, thisSession=None):
+def quit(thisExp, my_tracker,win=None, inputs=None, thisSession=None):
     """
     Fully quit, closing the window and ending the Python process.
     
@@ -1349,6 +1448,8 @@ def quit(thisExp, win=None, inputs=None, thisSession=None):
     logging.flush()
     if thisSession is not None:
         thisSession.stop()
+    # end ET
+    titta_end(my_tracker)
     # terminate Python process
     core.quit()
 
@@ -1361,6 +1462,8 @@ if __name__ == '__main__':
     logFile = setupLogging(filename=thisExp.dataFileName)
     win = setupWindow(expInfo=expInfo)
     inputs = setupInputs(expInfo=expInfo, thisExp=thisExp, win=win)
+    date_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    my_tracker = titta_init(f"{expInfo['participant']}_ET_{date_time}",win)
     run(
         expInfo=expInfo, 
         thisExp=thisExp, 
@@ -1368,4 +1471,4 @@ if __name__ == '__main__':
         inputs=inputs
     )
     saveData(thisExp=thisExp)
-    quit(thisExp=thisExp, win=win, inputs=inputs)
+    quit(thisExp=thisExp, my_tracker=my_tracker, win=win, inputs=inputs)
