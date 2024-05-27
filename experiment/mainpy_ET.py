@@ -1,4 +1,4 @@
-# !/usr/bin/env python
+ # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
@@ -32,6 +32,7 @@ import sys  # to get file system encoding
 
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
+import pylsl
 from pylsl import StreamInfo, StreamOutlet
 from titta import Titta, helpers_tobii as helpers
 import datetime
@@ -468,9 +469,9 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # Run 'Begin Experiment' code from code
     import random
     # standard_tone
-    standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\dada.wav"
+    standard_tone = r"C:\Users\user\Documents\PRAGYA\ecf-exp2-notif-mmn\experiment\audio\dada.wav"
     #deviant_tone  
-    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\bing.wav"
+    deviant_tone = r"C:\Users\user\Documents\PRAGYA\ecf-exp2-notif-mmn\experiment\audio\bing.wav"
     def gen_rnd(start, end,total_trail):
         while(1):
             random_numbers = np.random.randint(start, end, 150)
@@ -493,9 +494,9 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     tones = MMN_stimuli(900,deviant_tone,standard_tone)
     movie = visual.MovieStim(
         win, name='movie',
-        filename='E:\ecf-exp2-notif-mmn\experiment/video/video1.mp4', movieLib='ffpyplayer',
+        filename=r'C:\Users\user\Documents\PRAGYA\ecf-exp2-notif-mmn\experiment\video/video1.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
-        pos=(0, 0), size=(1.5,1), units=win.units,
+        pos=(0, 0), size=(1,.7), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
         depth=-1
     )
@@ -528,9 +529,9 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     tones_DT = MMN_stimuli(900,standard_tone,deviant_tone)
     movie_2 = visual.MovieStim(
         win, name='movie_2',
-        filename='E:\ecf-exp2-notif-mmn\experiment/video/video2.mp4', movieLib='ffpyplayer',
+        filename=r'C:\Users\user\Documents\PRAGYA\ecf-exp2-notif-mmn\experiment\video/video2.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
-        pos=(0, 0), size=(1.5,1), units=win.units,
+        pos=(0, 0), size=(1,0.7), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
         depth=-1
     )
