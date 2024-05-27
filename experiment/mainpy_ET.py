@@ -469,9 +469,9 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # Run 'Begin Experiment' code from code
     import random
     # standard_tone
-    standard_tone = r"C:\Users\user\Documents\PRAGYA\ecf-exp2-notif-mmn\experiment\audio\dada.wav"
+    standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\beep.wav"
     #deviant_tone  
-    deviant_tone = r"C:\Users\user\Documents\PRAGYA\ecf-exp2-notif-mmn\experiment\audio\bing.wav"
+    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\sub003_eureka.wav"
     def gen_rnd(start, end,total_trail):
         while(1):
             random_numbers = np.random.randint(start, end, 150)
@@ -1184,12 +1184,12 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 # add timestamp to datafile
                 thisExp.addData('sound_2.started', tThisFlipGlobal)
                 # add timestamp to datafile
-                if tone == deviant_tone:
+                if tone == standard_tone:
                     # Run 'End Routine' code from code_3
                     #port.write(bytes(markers['B2_deviant_tone_start']))
                     outlet.push_sample(markers['B2_deviant_tone_start'])
                     my_eeg_trigger(markers['B2_deviant_tone_start'][0])
-                elif tone == standard_tone:
+                elif tone == deviant_tone:
                     # Run 'End Routine' code from code_3
                     #port.write(bytes(markers['B2_standard_tone_start']))
                     outlet.push_sample(markers['B2_standard_tone_start'])
@@ -1207,12 +1207,12 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                     sound_2.tStop = t  # not accounting for scr refresh
                     sound_2.frameNStop = frameN  # exact frame index
                     # add timestamp to datafile
-                    if tone == deviant_tone:
+                    if tone == standard_tone:
                         # Run 'End Routine' code from code_3
                         #port.write(bytes(markers['B2_deviant_tone_end']))
                         outlet.push_sample(markers['B2_deviant_tone_end'])
                         my_eeg_trigger(markers['B2_deviant_tone_end'][0])
-                    elif tone == standard_tone:
+                    elif tone == deviant_tone :
                         # Run 'End Routine' code from code_3
                         #port.write(bytes(markers['B2_standard_tone_end']))
                         outlet.push_sample(markers['B2_standard_tone_end'])
