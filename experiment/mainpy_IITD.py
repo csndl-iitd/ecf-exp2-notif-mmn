@@ -54,11 +54,11 @@ def my_eeg_trigger(value):
         my_eeg_port.setData(value)
     if my_eeg_port_type=='serial':
         my_eeg_port.write(bytes([value]))
-    core.wait(0.005)
-    if my_eeg_port_type=='parallel':
-        my_eeg_port.setData(0)
-    if my_eeg_port_type=='serial':
-        my_eeg_port.write(bytes([0]))
+    #core.wait(0.005)
+    #if my_eeg_port_type=='parallel':
+    #    my_eeg_port.setData(0)
+    #if my_eeg_port_type=='serial':
+    #    my_eeg_port.write(bytes([0]))
 
 # --- Setup global variables (available in all functions) ---
 markers = { 
@@ -67,15 +67,15 @@ markers = {
         'B1_baseline_end': [13],
         'B1_standard_tone_start' : [14],
         'B1_deviant_tone_start' :[15],
-        'B1_standard_tone_end' : [16],
-        'B1_deviant_tone_end' :[18],
+        #'B1_standard_tone_end' : [16],
+        #'B1_deviant_tone_end' :[18],
         'B2_Boundary': [21],
         'B2_baseline_start': [22],
         'B2_baseline_end': [23],
         'B2_standard_tone_start' : [24],
         'B2_deviant_tone_start' :[25],
-        'B2_standard_tone_end' : [26],
-        'B2_deviant_tone_end' :[28],
+        #'B2_standard_tone_end' : [26],
+        #'B2_deviant_tone_end' :[28],
     }
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
@@ -372,7 +372,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # standard_tone
     standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\beep.wav"
     #deviant_tone  
-    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\sub008_nothing_gamma.wav"
+    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\sub011_Hello_inMoto.wav"
     def gen_rnd(start, end,total_trail):
         while(1):
             random_numbers = np.random.randint(start, end, 150)
@@ -602,7 +602,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         # Run 'Begin Routine' code from code
         tone = tones[trials.thisN]
         stimuli_start = 0.3 + (random.randint(0,10)*.01)
-        stimuli_dur = 0.5 +(random.randint(0,10)*.01)
+        stimuli_dur = 0.7 +(random.randint(0,10)*.01)
         sound_1.setSound(tone, secs=stimuli_dur, hamming=True)
         sound_1.setVolume(0.3, log=False)
         sound_1.seek(0)
@@ -695,16 +695,16 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                     # add timestamp to datafile
                     thisExp.timestampOnFlip(win, 'sound_1.stopped')
                     # add timestamp to datafile
-                    if tone == deviant_tone:
+                    #if tone == deviant_tone:
                         # Run 'End Routine' code from code_3
                         #port.write(bytes(markers['B1_deviant_tone_end']))
                         #outlet.push_sample(markers['B1_deviant_tone_end'])
-                        my_eeg_trigger(markers['B1_deviant_tone_end'][0])
-                    elif tone == standard_tone:
+                        #my_eeg_trigger(markers['B1_deviant_tone_end'][0])
+                    #elif tone == standard_tone:
                         # Run 'End Routine' code from code_3
                         #port.write(bytes(markers['B1_standard_tone_end']))
                         #outlet.push_sample(markers['B1_standard_tone_end'])
-                        my_eeg_trigger(markers['B1_standard_tone_end'][0])
+                    #    my_eeg_trigger(markers['B1_standard_tone_end'][0])
                     # update status
                     sound_1.status = FINISHED
                     sound_1.stop()
@@ -1013,7 +1013,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         # Run 'Begin Routine' code from code_4
         tone = tones_DT[trials_2.thisN]
         stimuli_start = 0.3 + (random.randint(0,10)*.01)
-        stimuli_dur = 0.5 +(random.randint(0,10)*.01)
+        stimuli_dur = 0.7 +(random.randint(0,10)*.01)
         sound_2.setSound(tone, secs=stimuli_dur, hamming=True)
         sound_2.setVolume(0.3, log=False)
         sound_2.seek(0)
@@ -1088,12 +1088,12 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                     # Run 'End Routine' code from code_3
                     #port.write(bytes(markers['B2_deviant_tone_start']))
                     #outlet.push_sample(markers['B2_deviant_tone_start'])
-                    my_eeg_trigger(markers['B2_deviant_tone_start'][0])
+                    my_eeg_trigger(markers['B2_standard_tone_start'][0])
                 elif tone == standard_tone:
                     # Run 'End Routine' code from code_3
                     #port.write(bytes(markers['B2_standard_tone_start']))
                     #outlet.push_sample(markers['B2_standard_tone_start'])
-                    my_eeg_trigger(markers['B2_standard_tone_start'][0])
+                    my_eeg_trigger(markers['B2_deviant_tone_start'][0])
                 thisExp.addData('sound_2.started', tThisFlipGlobal)
                 # update status
                 sound_2.status = STARTED
@@ -1107,16 +1107,16 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                     sound_2.tStop = t  # not accounting for scr refresh
                     sound_2.frameNStop = frameN  # exact frame index
                     # add timestamp to datafile
-                    if tone == deviant_tone:
+                    #if tone == deviant_tone:
                         # Run 'End Routine' code from code_3
                         #port.write(bytes(markers['B2_deviant_tone_end']))
                         #outlet.push_sample(markers['B2_deviant_tone_end'])
-                        my_eeg_trigger(markers['B2_deviant_tone_end'][0])
-                    elif tone == standard_tone:
+                        #my_eeg_trigger(markers['B2_deviant_tone_end'][0])
+                    #elif tone == standard_tone:
                         # Run 'End Routine' code from code_3
                         #port.write(bytes(markers['B2_standard_tone_end']))
                         #outlet.push_sample(markers['B2_standard_tone_end'])
-                        my_eeg_trigger(markers['B2_standard_tone_end'][0])
+                        #my_eeg_trigger(markers['B2_standard_tone_end'][0])
                     thisExp.timestampOnFlip(win, 'sound_2.stopped')
                     # update status
                     sound_2.status = FINISHED
@@ -1232,7 +1232,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 text_2.frameNStop = frameN  # exact frame index
                 # add timestamp to datafile
                     # Run 'End Routine' code from code_ 
-                #port.write(bytes(markers['B1_Boundary']))
                 #outlet.push_sample(markers['B2_Boundary'])
                 my_eeg_trigger(markers['B2_Boundary'][0])
                 thisExp.timestampOnFlip(win, 'text_2.stopped')
@@ -1337,6 +1336,7 @@ def quit(thisExp, win=None, inputs=None, thisSession=None):
         Handle of the Session object this experiment is being run from, if any.
     """
     thisExp.abort()  # or data files will save again on exit
+    my_eeg_port.close()
     # make sure everything is closed down
     if win is not None:
         # Flip one final time so any remaining win.callOnFlip() 
