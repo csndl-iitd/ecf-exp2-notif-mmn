@@ -54,11 +54,11 @@ def my_eeg_trigger(value):
         my_eeg_port.setData(value)
     if my_eeg_port_type=='serial':
         my_eeg_port.write(bytes([value]))
-    #core.wait(0.005)
-    #if my_eeg_port_type=='parallel':
-    #    my_eeg_port.setData(0)
-    #if my_eeg_port_type=='serial':
-    #    my_eeg_port.write(bytes([0]))
+    core.wait(0.005)
+    if my_eeg_port_type=='parallel':
+        my_eeg_port.setData(0)
+    if my_eeg_port_type=='serial':
+        my_eeg_port.write(bytes([0]))
 
 # --- Setup global variables (available in all functions) ---
 markers = { 
