@@ -372,7 +372,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # standard_tone
     standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\beep.wav"
     #deviant_tone  
-    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\sub011_Hello_inMoto.wav"
+    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\SD015_Realme_fun.wav"
     def gen_rnd(start, end,total_trail):
         while(1):
             random_numbers = np.random.randint(start, end, 150)
