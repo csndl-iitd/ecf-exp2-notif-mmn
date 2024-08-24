@@ -5,6 +5,7 @@ This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
     on May 13, 2024, at 21:53
 If you publish work using this script the most relevant publication is:
 
+
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
         PsychoPy2: Experiments in behavior made easy Behav Res 51: 195. 
         https://doi.org/10.3758/s13428-018-01193-y
@@ -372,7 +373,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # standard_tone
     standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\beep.wav"
     #deviant_tone  
-    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\SD015_Realme_fun.wav"
+    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\sub011_SD013_SD018_Hello_inMoto.wav"
     def gen_rnd(start, end,total_trail):
         while(1):
             random_numbers = np.random.randint(start, end, 150)
@@ -397,7 +398,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         win, name='movie',
         filename='E:\ecf-exp2-notif-mmn\experiment/video/video1.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
-        pos=(0, 0), size=(1.5,1), units=win.units,
+        pos=(0, 0), size=(1,.7), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
         depth=-1
     )
@@ -432,7 +433,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         win, name='movie_2',
         filename='E:\ecf-exp2-notif-mmn\experiment/video/video2.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
-        pos=(0, 0), size=(1.5,1), units=win.units,
+        pos=(0, 0), size=(1,.7), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
         depth=-1
     )
