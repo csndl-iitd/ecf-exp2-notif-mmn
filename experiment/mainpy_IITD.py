@@ -1,4 +1,5 @@
 # !/usr/bin/env python
+# !/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
@@ -373,7 +374,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # standard_tone
     standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\beep.wav"
     #deviant_tone  
-    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\SD015_SD022_Realme_fun.wav"
+    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\SD034_vibration.wav"
     def gen_rnd(start, end,total_trail):
         while(1):
             random_numbers = np.random.randint(start, end, 150)
@@ -439,7 +440,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     )
     sound_2 = sound.Sound('A', secs=-1, stereo=True, hamming=True,
         name='sound_2')
-    sound_2.setVolume(0.3)
+    sound_2.setVolume(0.5)
     
     # --- Initialize components for Routine "thank_you" ---
     text_2 = visual.TextStim(win=win, name='text_2',
