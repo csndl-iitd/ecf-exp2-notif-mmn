@@ -936,6 +936,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             text_CB.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(text_CB, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
+            my_eeg_trigger(markers['B1_Boundary'][0]) 
             thisExp.timestampOnFlip(win, 'text_CB.started')
             
             # update status
@@ -1337,7 +1338,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # Run 'End Routine' code from code_ 
             #port.write(bytes(markers['B1_Boundary']))
             #outlet.push_sample(markers['B1_Boundary'])
-            my_eeg_trigger(markers['B1_Boundary'][0])
+            my_eeg_trigger(markers['CB_Boundary'][0])
             thisExp.timestampOnFlip(win, 'text.started')
             # update status
             text.status = STARTED
