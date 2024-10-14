@@ -445,7 +445,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # standard_tone
     standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\beep.wav"
     #deviant_tone  
-    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\\bing.wav"
+    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\\SD019_SD028_SD030_SD35_ipone_note.wav"
     #control_tone
     control_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\control_tone.wav"
     def gen_rnd(start, end,total_trail):
@@ -712,7 +712,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     thisExp.nextEntry()
     
     # set up handler to look after randomisation of conditions etc
-    trials = data.TrialHandler(nReps=20.0, method='sequential', 
+    trials = data.TrialHandler(nReps=900.0, method='sequential', 
         extraInfo=expInfo, originPath=-1,
         trialList=[None],
         seed=None, name='trials')
@@ -1110,7 +1110,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     thisExp.nextEntry()
     
     # set up handler to look after randomisation of conditions etc
-    trials_3 = data.TrialHandler(nReps=20.0, method='sequential', 
+    trials_3 = data.TrialHandler(nReps=900.0, method='sequential', 
         extraInfo=expInfo, originPath=-1,
         trialList=[None],
         seed=None, name='trials_3')
@@ -1514,7 +1514,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     thisExp.nextEntry()
     
     # set up handler to look after randomisation of conditions etc
-    trials_2 = data.TrialHandler(nReps=20.0, method='sequential', 
+    trials_2 = data.TrialHandler(nReps=900.0, method='sequential', 
         extraInfo=expInfo, originPath=-1,
         trialList=[None],
         seed=None, name='trials_2')
