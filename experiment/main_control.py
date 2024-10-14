@@ -550,7 +550,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     tones_DT = MMN_stimuli(900,standard_tone,deviant_tone)
     movie_2 = visual.MovieStim(
         win, name='movie_2',
-        filename='video/video2.mp4', movieLib='ffpyplayer',
+        filename='video/video3.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
         pos=(0, 0), size=(1,.7), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
