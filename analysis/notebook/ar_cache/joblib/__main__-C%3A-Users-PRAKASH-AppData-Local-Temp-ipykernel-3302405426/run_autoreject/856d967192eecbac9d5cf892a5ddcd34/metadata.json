@@ -1,1 +1,0 @@
-{"duration": 39.655757427215576, "input_args": {"epochs": "<Epochs |  1800 events (all good), -0.25 \u2013 0.9 s, baseline -0.25 \u2013 0 s, ~995.9 MB, data loaded,\n '14': 750\n '15': 150\n '24': 750\n '25': 150>", "n_jobs": "-1", "cv": "5"}, "time": 1726385521.128736}
