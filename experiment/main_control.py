@@ -4,7 +4,7 @@
 This experiment was created using PsychoPy3 Experiment Builder (v2024.1.4),
     on October 07, 2024, at 11:30
 If you publish work using this script the most relevant publication is:
-
+Sd0 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
         PsychoPy2: Experiments in behavior made easy Behav Res 51: 195. 
         https://doi.org/10.3758/s13428-018-01193-y
@@ -445,7 +445,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # standard_tone
     standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\beep.wav"
     #deviant_tone  
-    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\\SD019_SD028_SD030_SD35_ipone_note.wav"
+    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\\sub011_SD013_SD018_Hello_inMoto.wav"
     #control_tone
     control_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\control_tone.wav"
     def gen_rnd(start, end,total_trail):
@@ -1205,7 +1205,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # if movie_CB is stopping this frame...
             if movie_CB.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > movie_CB.tStartRefresh + 1.3-frameTolerance:
+                if tThisFlipGlobal > movie_CB.tStartRefresh + 1180-frameTolerance:
                     # keep track of stop time/frame for later
                     movie_CB.tStop = t  # not accounting for scr refresh
                     movie_CB.tStopRefresh = tThisFlipGlobal  # on global time
