@@ -445,7 +445,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # standard_tone
     standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\beep.wav"
     #deviant_tone  
-    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\\sub011_SD013_SD018_Hello_inMoto.wav"
+    deviant_tone =r"E:\ecf-exp2-notif-mmn\experiment\audio\\SD024_SD049_oneplus_meet.wav" 
+    #
     #control_tone
     control_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\control_tone.wav"
     def gen_rnd(start, end,total_trail):
