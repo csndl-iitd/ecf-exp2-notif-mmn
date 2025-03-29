@@ -1,10 +1,10 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.1.4),
-    on March 29, 2025, at 09:32
+    on October 07, 2024, at 11:30
 If you publish work using this script the most relevant publication is:
-
+Sd0 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
         PsychoPy2: Experiments in behavior made easy Behav Res 51: 195. 
         https://doi.org/10.3758/s13428-018-01193-y
@@ -32,11 +32,59 @@ import sys  # to get file system encoding
 
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
+from pylsl import StreamInfo, StreamOutlet
+"""
+'# Set up LabStreamingLayer stream.'
+'info = StreamInfo(name='DataSyncMarker', type='Markers', channel_count=1,'
+'                      channel_format='int32', source_id='12345')'
+'outlet = StreamOutlet(info)  # Broadcast the stream.'
+"""
+#### for EEG ######
+my_eeg_port_type = 'serial'
+
+if my_eeg_port_type=='serial':
+    import serial
+    my_eeg_port= serial.Serial ('COM3' , baudrate =115200)
+if my_eeg_port_type=='parallel':
+    from psychopy import parallel
+    my_eeg_port = parallel.ParallelPort(address=0x6FF8)
+
+def my_eeg_trigger(value):
+    if my_eeg_port_type=='parallel':
+        my_eeg_port.setData(value)
+    if my_eeg_port_type=='serial':
+        my_eeg_port.write(bytes([value]))
+    core.wait(0.005)
+    if my_eeg_port_type=='parallel':
+        my_eeg_port.setData(0)
+    if my_eeg_port_type=='serial':
+        my_eeg_port.write(bytes([0]))
 
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
 deviceManager = hardware.DeviceManager()
-# ensure that relative paths start from the same directory as this script
+markers = { 
+        'B1_Boundary': [31],
+        'B1_baseline_start': [32],
+        'B1_baseline_end': [33],
+        'B1_standard_tone_start' : [34],
+        'B1_deviant_tone_start' :[35],
+        #'B1_standard_tone_end' : [16],
+        #'B1_deviant_tone_end' :[18],
+        'B2_Boundary': [21],
+        'B2_baseline_start': [22],
+        'B2_baseline_end': [23],
+        'B2_standard_tone_start' : [24],
+        'B2_deviant_tone_start' :[25],
+        #'B2_standard_tone_end' : [26],
+        #'B2_deviant_tone_end' :[28],
+        'CB_Boundary': [11],
+        'CB_baseline_start': [12],
+        'CB_baseline_end': [13],
+        'CB_standard_tone_start' : [14],
+        'CB_control_tone_start' :[15],
+    }
+# Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 # store info about the experiment session
 psychopyVersion = '2024.1.4'
@@ -395,9 +443,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # Run 'Begin Experiment' code from code
     import random
     # standard_tone
-    standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\iphone_sound.wav"
+    standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\beep.wav"
     #deviant_tone  
-    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\\bing.wav"
+    deviant_tone =r"E:\ecf-exp2-notif-mmn\experiment\audio\\SD014_SD032_SD044_SD055_MI_droplets.wav" 
+    #
     #control_tone
     control_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\control_tone.wav"
     def gen_rnd(start, end,total_trail):
@@ -419,12 +468,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 tone.append(standard_tone)
         return tone
     
-    tones = MMN_stimuli(900,deviant_tone,standard_tone)
+    #tones = MMN_stimuli(900,deviant_tone,standard_tone)
+    tones = MMN_stimuli(900,control_tone,standard_tone)
     movie = visual.MovieStim(
         win, name='movie',
         filename='video/video1.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
-        pos=(0, 0), size=(1.5,1), units=win.units,
+        pos=(0, 0), size=(1,.7), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
         depth=-1
     )
@@ -459,12 +509,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # --- Initialize components for Routine "vedio_audio_CB" ---
     # Run 'Begin Experiment' code from code_CB
     # control_tone as Deviant and standard_tone as usual
-    tones_CB = MMN_stimuli(900,control_tone,standard_tone)
+    #tones_CB = MMN_stimuli(900,control_tone,standard_tone)
+    # deviant_tone as Deviant and standard_tone as usual
+    tones_CB = MMN_stimuli(900,deviant_tone,standard_tone)
     movie_CB = visual.MovieStim(
         win, name='movie_CB',
         filename='video/video2.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
-        pos=(0, 0), size=(1.5,1), units=win.units,
+        pos=(0, 0), size=(1,.7), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
         depth=-1
     )
@@ -502,9 +554,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     tones_DT = MMN_stimuli(900,standard_tone,deviant_tone)
     movie_2 = visual.MovieStim(
         win, name='movie_2',
-        filename='video/video2.mp4', movieLib='ffpyplayer',
+        filename='video/video3.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
-        pos=(0, 0), size=(1.5,1), units=win.units,
+        pos=(0, 0), size=(1,.7), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
         depth=-1
     )
@@ -558,6 +610,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     continueRoutine = True
     # update component parameters for each repeat
     thisExp.addData('Start.started', globalClock.getTime(format='float'))
+    
+    # Run 'Begin Routine' code from code_3
+    #port.write(bytes(markers['B1_baseline_start']))
+    #outlet.push_sample(markers['B1_baseline_start'])
+    my_eeg_trigger(markers['B1_baseline_start'][0]) 
+    
     # keep track of which components have finished
     StartComponents = [welcome]
     for thisComponent in StartComponents:
@@ -592,6 +650,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             welcome.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(welcome, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
+            # Run 'End Routine' code from code_ 
+            #port.write(bytes(markers['B1_Boundary']))
+            #outlet.push_sample(markers['B1_Boundary'])
+            my_eeg_trigger(markers['B1_Boundary'][0]) 
             thisExp.timestampOnFlip(win, 'welcome.started')
             # update status
             welcome.status = STARTED
@@ -642,6 +704,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     thisExp.addData('Start.stopped', globalClock.getTime(format='float'))
+    #Run 'End Routine' code from code_3
+    #port.write(bytes(markers['B1_baseline_end']))
+    #outlet.push_sample(markers['B1_baseline_end'])
+    my_eeg_trigger(markers['B1_baseline_end'][0])
     # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
     if routineForceEnded:
         routineTimer.reset()
@@ -650,7 +716,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     thisExp.nextEntry()
     
     # set up handler to look after randomisation of conditions etc
-    trials = data.TrialHandler(nReps=20.0, method='sequential', 
+    trials = data.TrialHandler(nReps=900.0, method='sequential', 
         extraInfo=expInfo, originPath=-1,
         trialList=[None],
         seed=None, name='trials')
@@ -734,7 +800,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # if movie is stopping this frame...
             if movie.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > movie.tStartRefresh + 1.3-frameTolerance:
+                if tThisFlipGlobal > movie.tStartRefresh + 1180-frameTolerance:
                     # keep track of stop time/frame for later
                     movie.tStop = t  # not accounting for scr refresh
                     movie.tStopRefresh = tThisFlipGlobal  # on global time
@@ -753,6 +819,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 sound_1.tStart = t  # local t and not account for scr refresh
                 sound_1.tStartRefresh = tThisFlipGlobal  # on global time
                 # add timestamp to datafile
+                #if tone == deviant_tone:
+                if tone == control_tone:
+                    # Run 'End Routine' code from code_3
+                    #port.write(bytes(markers['B1_deviant_tone_start']))
+                    #outlet.push_sample(markers['B1_deviant_tone_start'])
+                    my_eeg_trigger(markers['B1_deviant_tone_start'][0])
+                elif tone == standard_tone:
+                    # Run 'End Routine' code from code_3
+                    #port.write(bytes(markers['B1_standard_tone_start']))
+                    #outlet.push_sample(markers['B1_standard_tone_start'])
+                    my_eeg_trigger(markers['B1_standard_tone_start'][0])
                 thisExp.addData('sound_1.started', tThisFlipGlobal)
                 # update status
                 sound_1.status = STARTED
@@ -864,7 +941,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             text_CB.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(text_CB, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
+            my_eeg_trigger(markers['B1_Boundary'][0]) 
             thisExp.timestampOnFlip(win, 'text_CB.started')
+            
             # update status
             text_CB.status = STARTED
             text_CB.setAutoDraw(True)
@@ -978,6 +1057,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             win.timeOnFlip(text_3, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
             thisExp.timestampOnFlip(win, 'text_3.started')
+            my_eeg_trigger(markers['CB_Boundary'][0]) 
             # update status
             text_3.status = STARTED
             text_3.setAutoDraw(True)
@@ -1035,7 +1115,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     thisExp.nextEntry()
     
     # set up handler to look after randomisation of conditions etc
-    trials_3 = data.TrialHandler(nReps=20.0, method='sequential', 
+    trials_3 = data.TrialHandler(nReps=900.0, method='sequential', 
         extraInfo=expInfo, originPath=-1,
         trialList=[None],
         seed=None, name='trials_3')
@@ -1111,6 +1191,18 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 win.timeOnFlip(movie_CB, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
                 thisExp.timestampOnFlip(win, 'movie_CB.started')
+                #if tone == control_tone:
+                if tone == deviant_tone:
+                    # Run 'End Routine' code from code_3
+                    #port.write(bytes(markers['B2_deviant_tone_start']))
+                    #outlet.push_sample(markers['B2_deviant_tone_start'])
+                    my_eeg_trigger(markers['CB_control_tone_start'][0])
+                elif tone == standard_tone:
+                    # Run 'End Routine' code from code_3
+                    #port.write(bytes(markers['B2_standard_tone_start']))
+                    #outlet.push_sample(markers['B2_standard_tone_start'])
+                    my_eeg_trigger(markers['CB_standard_tone_start'][0])
+                
                 # update status
                 movie_CB.status = STARTED
                 movie_CB.setAutoDraw(True)
@@ -1119,7 +1211,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # if movie_CB is stopping this frame...
             if movie_CB.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > movie_CB.tStartRefresh + 1.3-frameTolerance:
+                if tThisFlipGlobal > movie_CB.tStartRefresh + 1180-frameTolerance:
                     # keep track of stop time/frame for later
                     movie_CB.tStop = t  # not accounting for scr refresh
                     movie_CB.tStopRefresh = tThisFlipGlobal  # on global time
@@ -1249,6 +1341,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             text.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(text, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
+            # Run 'End Routine' code from code_ 
+            #port.write(bytes(markers['B1_Boundary']))
+            #outlet.push_sample(markers['B1_Boundary'])
+            my_eeg_trigger(markers['CB_Boundary'][0])
             thisExp.timestampOnFlip(win, 'text.started')
             # update status
             text.status = STARTED
@@ -1362,6 +1458,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             text_3.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(text_3, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
+            # Run 'End Routine' code from code_ 
+            #port.write(bytes(markers['B2_Boundary']))
+            #outlet.push_sample(markers['B2_Boundary'])
+            my_eeg_trigger(markers['B2_Boundary'][0])
             thisExp.timestampOnFlip(win, 'text_3.started')
             # update status
             text_3.status = STARTED
@@ -1420,7 +1520,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     thisExp.nextEntry()
     
     # set up handler to look after randomisation of conditions etc
-    trials_2 = data.TrialHandler(nReps=20.0, method='sequential', 
+    trials_2 = data.TrialHandler(nReps=900.0, method='sequential', 
         extraInfo=expInfo, originPath=-1,
         trialList=[None],
         seed=None, name='trials_2')
@@ -1504,7 +1604,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # if movie_2 is stopping this frame...
             if movie_2.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > movie_2.tStartRefresh + 1.3-frameTolerance:
+                if tThisFlipGlobal > movie_2.tStartRefresh + 1180-frameTolerance:
                     # keep track of stop time/frame for later
                     movie_2.tStop = t  # not accounting for scr refresh
                     movie_2.tStopRefresh = tThisFlipGlobal  # on global time
@@ -1523,6 +1623,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 sound_2.tStart = t  # local t and not account for scr refresh
                 sound_2.tStartRefresh = tThisFlipGlobal  # on global time
                 # add timestamp to datafile
+                # add timestamp to datafile
+                thisExp.addData('sound_2.started', tThisFlipGlobal)
+                # add timestamp to datafile
+                if tone == deviant_tone:
+                    # Run 'End Routine' code from code_3
+                    #port.write(bytes(markers['B2_deviant_tone_start']))
+                    #outlet.push_sample(markers['B2_deviant_tone_start'])
+                    my_eeg_trigger(markers['B2_standard_tone_start'][0])
+                elif tone == standard_tone:
+                    # Run 'End Routine' code from code_3
+                    #port.write(bytes(markers['B2_standard_tone_start']))
+                    #outlet.push_sample(markers['B2_standard_tone_start'])
+                    my_eeg_trigger(markers['B2_deviant_tone_start'][0])
+                
                 thisExp.addData('sound_2.started', tThisFlipGlobal)
                 # update status
                 sound_2.status = STARTED
@@ -1652,6 +1766,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 text_2.tStopRefresh = tThisFlipGlobal  # on global time
                 text_2.frameNStop = frameN  # exact frame index
                 # add timestamp to datafile
+                    # Run 'End Routine' code from code_ 
+                #outlet.push_sample(markers['B2_Boundary'])
+                my_eeg_trigger(markers['B2_Boundary'][0])
                 thisExp.timestampOnFlip(win, 'text_2.stopped')
                 # update status
                 text_2.status = FINISHED
