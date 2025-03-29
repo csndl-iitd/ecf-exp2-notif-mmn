@@ -18,6 +18,7 @@ from psychopy import plugins
 plugins.activatePlugins()
 prefs.hardware['audioLib'] = 'ptb'
 prefs.hardware['audioLatencyMode'] = '3'
+
 from psychopy import sound, gui, visual, core, data, event, logging, clock, colors, layout, hardware
 from psychopy.tools import environmenttools
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
@@ -303,7 +304,7 @@ def setupDevices(expInfo, thisExp, win):
     deviceManager.addDevice(
         deviceName='sound_1',
         deviceClass='psychopy.hardware.speaker.SpeakerDevice',
-        index=-1
+        index=6
     )
     if deviceManager.getDevice('key_resp_CB') is None:
         # initialise key_resp_CB
@@ -315,7 +316,7 @@ def setupDevices(expInfo, thisExp, win):
     deviceManager.addDevice(
         deviceName='sound_CB',
         deviceClass='psychopy.hardware.speaker.SpeakerDevice',
-        index=-1
+        index=6
     )
     if deviceManager.getDevice('key_resp') is None:
         # initialise key_resp
@@ -327,7 +328,7 @@ def setupDevices(expInfo, thisExp, win):
     deviceManager.addDevice(
         deviceName='sound_2',
         deviceClass='psychopy.hardware.speaker.SpeakerDevice',
-        index=-1
+        index=6
     )
     # return True if completed successfully
     return True
