@@ -1,5 +1,5 @@
 import numpy as np
-
+import mne
 
 # config file
 
@@ -124,10 +124,10 @@ def Average_in_trials_in_time_window(Epoches,chan, stime,etime):
 
 def remove_epochs_with_n_bad_channels(epochs, bad_chn_thresold, amplitude_threshold=80e-6):
     """
-    Remove epochs where MMN-related channels exceed the amplitude threshold.
+    Remove epochs if n number of bad channel by thresold remove it
     
     :param epochs: mne.Epochs object
-    :param mmn_channels: List of MMN channel names
+    :param bad_chn_thresold : check n number of bad channel
     :param amplitude_threshold: Amplitude difference threshold in Volts (default: 80 microvolts)
     :return: mne.Epochs object with bad epochs removed
     """
@@ -145,3 +145,38 @@ def remove_epochs_with_n_bad_channels(epochs, bad_chn_thresold, amplitude_thresh
         
     good_epochs = np.setdiff1d(np.arange(len(epochs)), bad_mmn_epochs)
     return epochs[good_epochs]
+
+
+
+def remove_or_interpolate_epochs_with_n_bad_chn(epochs, bad_chn_threshold, amplitude_threshold=80e-6):
+    """
+    Remove epochs if the number of bad channels exceeds a threshold, otherwise interpolate the bad channels.
+
+    :param epochs: mne.Epochs object
+    :param bad_chn_threshold: Maximum number of bad channels allowed before rejecting the epoch
+    :param amplitude_threshold: Amplitude threshold in Volts to mark a channel as bad (default: 80 microvolts)
+    :return: New mne.Epochs object with bad epochs removed or interpolated
+    """
+    data = epochs.get_data()
+    good_epochs = []
+
+    for epoch_idx in range(len(epochs)):
+        epoch_data = data[epoch_idx]
+        bad_channel_indices = identify_bad_channels(epoch_data[np.newaxis, :, :], amplitude_threshold)
+        bad_channel_names = [epochs.ch_names[i] for i in bad_channel_indices]
+
+        if len(bad_channel_indices) > bad_chn_threshold:
+            continue  # Skip this epoch
+        else:
+            # Create a copy of the single epoch
+            epoch = epochs[epoch_idx].copy()
+            if len(bad_channel_indices) > 0:
+                epoch.info['bads'] = bad_channel_names
+                epoch.interpolate_bads(reset_bads=True)
+            good_epochs.append(epoch)
+
+    # Concatenate the list of good/interpolated single-epoch Epochs into a new Epochs object
+    if good_epochs:
+        return mne.concatenate_epochs(good_epochs)
+    else:
+        return None  # or raise an error if all epochs are bad
