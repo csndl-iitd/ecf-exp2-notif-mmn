@@ -96,7 +96,7 @@ def remove_epochs_with_bad_mmn_channels(epochs, mmn_channels, amplitude_threshol
             ch_name = epochs.ch_names[ch_idx]
             if any(mmn_ch in ch_name for mmn_ch in mmn_channels):
                 bad_mmn_epochs.append(epoch_idx)
-                break
+                
     
     good_epochs = np.setdiff1d(np.arange(len(epochs)), bad_mmn_epochs)
     return epochs[good_epochs]
@@ -141,7 +141,7 @@ def remove_epochs_with_n_bad_channels(epochs, bad_chn_thresold, amplitude_thresh
         
         if len(epoch_bad_channels) > bad_chn_thresold:
                 bad_mmn_epochs.append(epoch_idx)
-                break
+                
         
     good_epochs = np.setdiff1d(np.arange(len(epochs)), bad_mmn_epochs)
     return epochs[good_epochs]

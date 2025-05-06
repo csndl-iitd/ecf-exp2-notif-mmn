@@ -34,7 +34,7 @@ def EEG_preprocessing(sub_eeg_path, config):
             
             #removing Eye movement artifacts 
             eog_indices, eog_scores = ica.find_bads_eog(raw, ch_name=config['eog_chn'])
-            print(eog_indices, "EoG event ICA component")
+            print(eog_indices, "EoG event ICA component ")
             ica.exclude = eog_indices
             ica.apply(raw)
             events,event_dict = mne.events_from_annotations(raw)
