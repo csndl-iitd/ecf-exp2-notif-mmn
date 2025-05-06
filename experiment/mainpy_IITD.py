@@ -374,7 +374,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # standard_tone
     standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\beep.wav"
     #deviant_tone  
-    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\SD034_vibration.wav"
+    deviant_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\SD057_jai_shree_shyam.wav"
     def gen_rnd(start, end,total_trail):
         while(1):
             random_numbers = np.random.randint(start, end, 150)
@@ -397,13 +397,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     tones = MMN_stimuli(900,deviant_tone,standard_tone)
     movie = visual.MovieStim(
         win, name='movie',
-        filename='E:\ecf-exp2-notif-mmn\experiment/video/video1.mp4', movieLib='ffpyplayer',
+        filename='E:\ecf-exp2-notif-mmn\experiment/video/video2.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
         pos=(0, 0), size=(1,.7), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
         depth=-1
     )
-    sound_1 = sound.Sound('A', secs=-1, stereo=True, hamming=True,
+    sound_1 = sound.Sound('A', secs=8, stereo=True, hamming=True,
         name='sound_1')
     sound_1.setVolume(0.3)
     
@@ -432,13 +432,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     tones_DT = MMN_stimuli(900,standard_tone,deviant_tone)
     movie_2 = visual.MovieStim(
         win, name='movie_2',
-        filename='E:\ecf-exp2-notif-mmn\experiment/video/video2.mp4', movieLib='ffpyplayer',
+        filename='E:\ecf-exp2-notif-mmn\experiment/video/video3.mp4', movieLib='ffpyplayer',
         loop=False, volume=1.0, noAudio=True,
         pos=(0, 0), size=(1,.7), units=win.units,
         ori=0.0, anchor='center',opacity=None, contrast=1.0,
         depth=-1
     )
-    sound_2 = sound.Sound('A', secs=-1, stereo=True, hamming=True,
+    sound_2 = sound.Sound('A', secs=8, stereo=True, hamming=True,
         name='sound_2')
     sound_2.setVolume(0.5)
     

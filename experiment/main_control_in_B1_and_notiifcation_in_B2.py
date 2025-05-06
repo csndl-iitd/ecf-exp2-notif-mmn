@@ -304,7 +304,7 @@ def setupDevices(expInfo, thisExp, win):
     deviceManager.addDevice(
         deviceName='sound_1',
         deviceClass='psychopy.hardware.speaker.SpeakerDevice',
-        index=6
+        index=8
     )
     if deviceManager.getDevice('key_resp_CB') is None:
         # initialise key_resp_CB
@@ -316,7 +316,7 @@ def setupDevices(expInfo, thisExp, win):
     deviceManager.addDevice(
         deviceName='sound_CB',
         deviceClass='psychopy.hardware.speaker.SpeakerDevice',
-        index=6
+        index=8
     )
     if deviceManager.getDevice('key_resp') is None:
         # initialise key_resp
@@ -328,7 +328,7 @@ def setupDevices(expInfo, thisExp, win):
     deviceManager.addDevice(
         deviceName='sound_2',
         deviceClass='psychopy.hardware.speaker.SpeakerDevice',
-        index=6
+        index=8
     )
     # return True if completed successfully
     return True
@@ -446,7 +446,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # standard_tone
     standard_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\beep.wav"
     #deviant_tone  
-    deviant_tone =r"E:\ecf-exp2-notif-mmn\experiment\audio\\SD014_SD032_SD044_SD055_MI_droplets.wav" 
+    deviant_tone =r"E:\ecf-exp2-notif-mmn\experiment\audio\\SD012_SD016_SD036_SD038_SD051_SD67_Whoop_doop.wav" 
     #
     #control_tone
     control_tone = r"E:\ecf-exp2-notif-mmn\experiment\audio\control_tone.wav"
