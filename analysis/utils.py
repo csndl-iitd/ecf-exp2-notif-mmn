@@ -75,7 +75,35 @@ def identify_bad_channels(data, threshold=80e-6):
     return bad_channels.tolist()
 
 
-def remove_epochs_with_bad_mmn_channels(epochs, mmn_channels, amplitude_threshold=80e-6):
+def identify_bad_channels_by_value(data, threshold=80e-6):
+    """
+    Identify bad channels where any value exceeds +/- threshold.
+
+    Parameters:
+    ----------
+    data : np.ndarray
+        3D array of shape (n_epochs, n_channels, n_times), in Volts.
+    threshold : float
+        Amplitude threshold in Volts (default is 80 µV = 80e-6 V).
+
+    Returns:
+    -------
+    bad_channels : list of int
+        Indices of channels where at least one value exceeds the threshold.
+    """
+    # Check if any absolute value exceeds the threshold
+    exceeds = np.abs(data) > threshold  # shape: (n_epochs, n_channels, n_times)
+
+    # Any point in any epoch where the value exceeds the threshold
+    bad_mask = np.any(exceeds, axis=(0, 2))  # shape: (n_channels,)
+
+    # Get channel indices
+    bad_channels = np.where(bad_mask)[0]
+
+    return bad_channels.tolist()
+
+
+def remove_epochs_with_bad_mmn_channels(epochs, mmn_channels, amplitude_threshold=90e-6):
     """
     Remove epochs where MMN-related channels exceed the amplitude threshold.
     
@@ -163,6 +191,12 @@ def remove_or_interpolate_epochs_with_n_bad_chn(epochs, bad_chn_threshold, ampli
     for epoch_idx in range(len(epochs)):
         epoch_data = data[epoch_idx]
         bad_channel_indices = identify_bad_channels(epoch_data[np.newaxis, :, :], amplitude_threshold)
+        # print("bad_channel_indices", bad_channel_indices)
+        # epoch_bad_channels_by_value = identify_bad_channels_by_value(epoch_data[np.newaxis, :, :])
+        # print("epoch_bad_channels_by_value",epoch_bad_channels_by_value)
+        # if epoch_bad_channels_by_value:
+        #     bad_channel_indices.extend(epoch_bad_channels_by_value)
+        # bad_channel_indices = list(set(bad_channel_indices))
         bad_channel_names = [epochs.ch_names[i] for i in bad_channel_indices]
 
         if len(bad_channel_indices) > bad_chn_threshold:
