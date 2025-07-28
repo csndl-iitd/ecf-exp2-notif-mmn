@@ -198,15 +198,18 @@ def remove_or_interpolate_epochs_with_n_bad_chn(epochs, bad_chn_threshold, ampli
         #     bad_channel_indices.extend(epoch_bad_channels_by_value)
         # bad_channel_indices = list(set(bad_channel_indices))
         bad_channel_names = [epochs.ch_names[i] for i in bad_channel_indices]
+        
 
         if len(bad_channel_indices) > bad_chn_threshold:
+            print(f'Epoch index {epoch_idx} Skipped ; Bad channels {bad_channel_names}')
             continue  # Skip this epoch
         else:
             # Create a copy of the single epoch
             epoch = epochs[epoch_idx].copy()
             if len(bad_channel_indices) > 0:
                 epoch.info['bads'] = bad_channel_names
-                epoch.interpolate_bads(reset_bads=True)
+                print(f'Epoch index {epoch_idx} ; Interpolating channels {bad_channel_names}')
+                epoch.interpolate_bads(reset_bads=True)      
             good_epochs.append(epoch)
 
     # Concatenate the list of good/interpolated single-epoch Epochs into a new Epochs object
