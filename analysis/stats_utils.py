@@ -242,7 +242,7 @@ def extract_mean_amplitudes(case1_dict, case2_dict, time_window=(100, 250), chan
         # Extract MMN data for the time window
         case1_data = case1_dict[subject].copy().crop(tmin=time_window[0]/1000, 
                                                      tmax=time_window[1]/1000)
-        case2_data = case2_dict[subject].copy().crop(tmin=time_window[0]/1000, 
+        case2_data = case2_dict[subject].copy().crop(tmin=time_window[0]/1000,   
                                                      tmax=time_window[1]/1000)
         
         # Get mean amplitude for specific channels or all channels
