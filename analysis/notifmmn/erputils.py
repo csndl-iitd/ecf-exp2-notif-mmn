@@ -5,31 +5,52 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import mne
 
-def compute_single_erp_scores(epochs, window, latency_fractions=[0.25], picks=None, extrema=-1):
+def _compute_peak_latency_amplitudes(erps, window, extrema=-1):
+    '''
+    Computes the peak latency and peak amplitude of a positive or negative peak
+    (determined by extrema parameter) within a given window.
+    '''
+    pls = (extrema*erps.loc[window[0]:window[1]]).idxmax()
+    pas = pd.Series([erps[c].loc[t] for c,t in zip(erps.columns, pls)], index=pls.index)
+    # peaks at boundaries should not be considered peaks, so we require
+    # that peaks are at least 5 ms away fron boundaries of the window
+    pls[(pls<window[0]+0.005)|(pls>window[1]-0.005)] = np.nan
+    pas[(pls<window[0]+0.005)|(pls>window[1]-0.005)] = np.nan
+    return pd.concat(dict(
+        PL=pls,
+        PA=pas
+    ), axis=1)
+
+def _compute_areal_latency_amplitude(erps, window, latency_fractions=[0.25], extrema=-1):
+    '''
+    Computes the area under curve within the window to obtain the amplitude
+    and the times at which the area crosses certain fractions to obtain latency.
+    '''
+    erps = (erps*extrema).loc[window[0]:window[1]]
+    # detrend the ERPs so that end points are both at 0
+    erps = erps.apply(lambda c: c - c.iloc[0] - (c.iloc[-1]-c.iloc[0])*np.arange(len(c))/len(c))
+    amp = erps.sum()
+    cs = erps.cumsum()
+    tfs = {'TWMA':amp/len(erps)*extrema}
+    for f in latency_fractions:
+        tfs[f'FAL_{f}'] = (cs < amp*f).cumsum().idxmax()
+    return pd.concat(tfs, axis=1)
+
+def compute_single_erp_scores(erps, window, latency_fractions=[0.25], extrema=-1):
     '''
     Returns the following scores for an ERP waveform derived by averaging the epochs
     1. peak amplitude (of the highest peak in the window) [PA]
     2. peak latency (of the highest peak in the window) [PL]
     3. time-window mean amplitude [TWMA]
     4. fractional area latency [FAL]
+    erps is a list of pandas dataframes
     '''
-    if picks is None:
-        picks = epochs[0].columns
-    erp = epochs[0][picks].mean(axis=1).groupby('time').mean()
-    erp_win = erp.loc[window[0]:window[1]]
-    # find the peak of the erp and its amplitude
-    t = (extrema*erp_win).idxmax()
-    a = erp.loc[t]
-    # find the integrated area in the window for the erp
-    ia = erp_win.mean()
-    # find the latencies for different fractional coverages
-    tfs = {}
-    # TODO: fractional area latency needs to be fixed!
-    for f in latency_fractions:
-        tfs[f'FAL_{f}'] = erp_win.index[extrema*erp_win.cumsum()>extrema*erp_win.sum()*f][0]
-    return pd.concat([pd.Series(dict(PA=a, PL=t, TWMA=ia)), pd.Series(tfs)], names=['iteration']), [erp]
+    return pd.concat([
+        _compute_peak_latency_amplitudes(erps[0], window, extrema),
+        _compute_areal_latency_amplitude(erps[0], window, latency_fractions, extrema)
+    ], axis=1)
 
-def compute_dwave_scores(epochs, window, latency_fractions=[0.25], picks=None, extrema=-1):
+def compute_dwave_scores(erps, window, latency_fractions=[0.25], picks=None, extrema=-1):
     '''
     Returns the following scores for an ERP difference wave derived by averaging
     the two groups of epochs and subtracting group 1 from group 0
@@ -38,25 +59,13 @@ def compute_dwave_scores(epochs, window, latency_fractions=[0.25], picks=None, e
     3. time-window mean amplitude [TWMA]
     4. fractional area latency [FAL]
     '''
-    if picks is None:
-        picks = epochs[0].columns
-    erp0 = epochs[0][picks].mean(axis=1).groupby('time').mean()
-    erp1 = epochs[1][picks].mean(axis=1).groupby('time').mean()
-    dwave = erp0 - erp1
-    erp_win = dwave.loc[window[0]:window[1]]
-    # find the peak of the erp and its amplitude
-    t = (extrema*erp_win).idxmax()
-    a = dwave.loc[t]
-    # find the integrated area in the window for the erp
-    ia = erp_win.mean()
-    # find the latencies for different fractional coverages
-    tfs = {}
-    # TODO: fractional area latency needs to be fixed!
-    for f in latency_fractions:
-        tfs[f'FAL_{f}'] = erp_win.index[extrema*erp_win.cumsum()>extrema*erp_win.sum()*f][0]
-    return pd.concat([pd.Series(dict(PA=a, PL=t, TWMA=ia)), pd.Series(tfs)], names=['iteration']), [dwave]
+    dwave = erps[0] - erps[1]
+    return pd.concat([
+        _compute_peak_latency_amplitudes(dwave, window, extrema),
+        _compute_areal_latency_amplitude(dwave, window, latency_fractions, extrema)
+    ], axis=1)
 
-def compute_bootstrapped_scores(epochs, fn, n_iterations, sample_size=None, **kwargs):
+def compute_bootstrapped_scores(epochs, fn, n_iterations, sample_size=None, picks=None, **kwargs):
     '''
     Compute score(s) with SEM by bootstrapping over epochs
     epochs: an instance of epochs, or list of epoch instances when more than one are required (for example for a difference wave)
@@ -71,32 +80,21 @@ def compute_bootstrapped_scores(epochs, fn, n_iterations, sample_size=None, **kw
         epochs = [epochs]
     if sample_size is None:
         sample_size = [len(x) for x in epochs]
+    if picks is None:
+        picks = epochs[0].columns
+    
     # convert epochs to dataframes for faster computation inside the loop
     epochs = [
-        e.to_data_frame().drop('condition', axis=1).set_index(['time', 'epoch']).unstack('time') for e in epochs
+        e.to_data_frame().drop('condition', axis=1).set_index(['time', 'epoch'])[picks]\
+            .unstack('time').T.groupby('time').mean().T for e in epochs
     ]
-    scores, erps = {}, {}
-    itr, errs = 0, []
-    with tqdm(total=n_iterations, desc='iter') as pbar:
-        while itr < n_iterations:
-            try:
-                _epochs = []
-                # generate bootstrapped epochs
-                for epoch, ss in zip(epochs, sample_size):
-                    _epochs.append(
-                        epoch.sample(ss, replace=True).stack('time', future_stack=True)
-                    )
-                # generate corresponding scores
-                scores[itr], erps[itr] = fn(_epochs, **kwargs)
-                itr += 1
-                pbar.update(1)
-            except Exception as e:
-                errs.append(e)
-                # print(e)
-                # if too many iterations are failing, break to get out of the loop
-                if len(errs)>=100:
-                    break
-    return pd.concat(scores, names=['iteration', 'score']).unstack('score'), erps, errs
+    erp_list = []
+    for e, ss in zip(epochs, sample_size):
+        erps = {}
+        for itr in range(n_iterations):
+            erps[itr] = e.sample(ss, replace=True).mean()
+        erp_list.append(pd.concat(erps, axis=1))
+    return fn(erp_list, **kwargs), erp_list
 
 def get_erp_sem(epochs, n_iterations, sample_size=None, verifiplot=True, **kwargs):
     '''
@@ -112,16 +110,17 @@ def get_erp_sem(epochs, n_iterations, sample_size=None, verifiplot=True, **kwarg
     if not isinstance(epochs, list):
         epochs = [epochs]
     if len(epochs)==1:
-        scores, erps, errs = compute_bootstrapped_scores(
+        scores, erps = compute_bootstrapped_scores(
             epochs, compute_single_erp_scores, n_iterations=n_iterations, sample_size=sample_size, **kwargs
         )
+        erps = erps[0]
     elif len(epochs)==2:
-        scores, erps, errs = compute_bootstrapped_scores(
+        scores, erps = compute_bootstrapped_scores(
             epochs, compute_dwave_scores, n_iterations=n_iterations, sample_size=sample_size, **kwargs
         )
+        erps = erps[0] - erps[1]
     else:
         raise ValueError('exactly one or two sets of epochs must be given.')
-    erps = pd.concat({k:v[0] for k, v in erps.items()}, axis=1)
 
     f = None
     if verifiplot:
@@ -136,4 +135,4 @@ def get_erp_sem(epochs, n_iterations, sample_size=None, verifiplot=True, **kwarg
             scores.aggregate(['mean', 'std']).to_string(float_format='{:.3f}'.format, col_space=8, justify='right'),
             (10, 10), xycoords='axes pixels', family='monospace'
         )
-    return scores, erps, errs, f
+    return scores, erps, f
