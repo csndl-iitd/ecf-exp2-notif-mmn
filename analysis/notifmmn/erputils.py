@@ -65,7 +65,7 @@ def compute_dwave_scores(erps, window, latency_fractions=[0.25], picks=None, ext
         _compute_areal_latency_amplitude(dwave, window, latency_fractions, extrema)
     ], axis=1)
 
-def compute_bootstrapped_scores(epochs, fn, n_iterations, sample_size=None, picks=None, **kwargs):
+def compute_bootstrapped_scores(epochs, fn, n_iterations, sample_size=None, picks=None, offsets=0, **kwargs):
     '''
     Compute score(s) with SEM by bootstrapping over epochs
     epochs: an instance of epochs, or list of epoch instances when more than one are required (for example for a difference wave)
@@ -74,6 +74,7 @@ def compute_bootstrapped_scores(epochs, fn, n_iterations, sample_size=None, pick
     fn must return a set of scores as a pandas series and the list of generated erps for each input epoch
     n_iterations: number of times resampling should be performed
     sample_size: int or list of ints (number of samples to draw in each iteration). default None will use the same number of samples as original epochs instance
+    offsets: int or list of ints (number of time samples to shift the epochs; negative to shift ERP to left). default 0 will not shift the epochs
     kwargs: arguments to be passed to the function fn
     '''
     if not isinstance(epochs, list):
@@ -82,6 +83,12 @@ def compute_bootstrapped_scores(epochs, fn, n_iterations, sample_size=None, pick
         sample_size = [len(x) for x in epochs]
     if picks is None:
         picks = epochs[0].columns
+    if not isinstance(offsets, list):
+        offsets = [offsets]*len(epochs)
+    if len(offsets)!=len(epochs):
+        raise ValueError('number of offsets must match number of epochs')
+    if len(sample_size)!=len(epochs):
+        raise ValueError('number of sample sizes must match number of epochs')
     
     # convert epochs to dataframes for faster computation inside the loop
     epochs = [
@@ -89,16 +96,16 @@ def compute_bootstrapped_scores(epochs, fn, n_iterations, sample_size=None, pick
             .unstack('time').T.groupby('time').mean().T for e in epochs
     ]
     erp_list = []
-    for e, ss in zip(epochs, sample_size):
+    for e, ss, offset in zip(epochs, sample_size, offsets):
         erps = {}
         for itr in range(n_iterations):
             erps[itr] = e.sample(ss, replace=True).mean()
-        erp_list.append(pd.concat(erps, axis=1))
+        erp_list.append(pd.concat(erps, axis=1).shift(offset))
     return fn(erp_list, **kwargs), erp_list
 
-def get_erp_sem(epochs, n_iterations, sample_size=None, verifiplot=True, **kwargs):
+def get_erp_sem(epochs, n_iterations, sample_size=None, verifiplot=True, ax=None, **kwargs):
     '''
-    Returns the scores, erps, errors (encountered in each bootstrapped iteration) and figure object (if verifiplot)
+    Returns the scores, erps and figure object (if verifiplot)
     epochs: if single epochs instance, computes single erp scores
             if list of two epochs, computes the scores for the difference wave
     n_iterations: number of bootstrap iterations to run
@@ -125,14 +132,15 @@ def get_erp_sem(epochs, n_iterations, sample_size=None, verifiplot=True, **kwarg
     f = None
     if verifiplot:
         window = kwargs.pop('window')
-        f, ax = plt.subplots(figsize=(8, 3), tight_layout=True)
+        if ax is None:
+            f, ax = plt.subplots(figsize=(8, 3), tight_layout=True)
         erps.plot(ax=ax, c='C0', alpha=0.01, legend=False)
         ax.scatter(scores.PL, scores.PA, s=1, c='k')
         ax.set_xlabel('time (s)')
         ax.set_ylabel('voltage ($\mu V$)')
         ax.axvspan(*window, color='gray', alpha=0.1)
         ax.annotate(
-            scores.aggregate(['mean', 'std']).to_string(float_format='{:.3f}'.format, col_space=8, justify='right'),
-            (10, 10), xycoords='axes pixels', family='monospace'
+            scores.aggregate(['mean', 'std']).to_string(float_format='{:.3f}'.format, col_space=6, justify='right'),
+            (10, 10), xycoords='axes pixels', family='monospace', fontsize=7
         )
     return scores, erps, f
