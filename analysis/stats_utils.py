@@ -257,3 +257,50 @@ def extract_mean_amplitudes(case1_dict, case2_dict, time_window=(100, 250), chan
         amplitudes_case2.append(case2_amp)
     
     return np.array(amplitudes_case1), np.array(amplitudes_case2), common_subjects
+
+
+
+import numpy as np
+
+def snap_times_to_evoked(N1_align_all_sub_result, evoked_dicts):
+    """
+    Snap times in N1_align_all_sub_result to the nearest available time
+    from the provided evoked_dicts.
+    
+    Parameters
+    ----------
+    N1_align_all_sub_result : dict
+        Dict like {sub: {"beep": {"time": ...}, "sn": {"time": ...}}}
+    evoked_dicts : dict
+        Dict mapping condition name to {sub: Evoked}, 
+        e.g. {"beep": beep_evoked_dict, "sn": sn_evoked_dict}
+    
+    Returns
+    -------
+    snapped_result : dict
+        Same structure as N1_align_all_sub_result, but with times snapped.
+    """
+    snapped_result = {}
+
+    for subj, conds in N1_align_all_sub_result.items():
+        snapped_result[subj] = {}
+
+        for cond, info in conds.items():
+            raw_time = info["time"]
+
+            # check if condition has an evoked dict
+            if cond in evoked_dicts and subj in evoked_dicts[cond]:
+                evoked = evoked_dicts[cond][subj]
+                evoked_times = evoked.times
+
+                # find nearest index
+                idx = np.argmin(np.abs(evoked_times - raw_time))
+                nearest_time = evoked_times[idx]
+
+                snapped_result[subj][cond] = {"time": float(nearest_time)}
+                
+            else:
+                # keep original
+                snapped_result[subj][cond] = {"time": float(raw_time)}
+
+    return snapped_result
