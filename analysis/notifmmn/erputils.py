@@ -125,6 +125,8 @@ def get_erp_sem(epochs, n_iterations, sample_size=None, verifiplot=True, ax=None
         scores, erps = compute_bootstrapped_scores(
             epochs, compute_dwave_scores, n_iterations=n_iterations, sample_size=sample_size, **kwargs
         )
+        erp0 = erps[0]
+        erp1 = erps[1]
         erps = erps[0] - erps[1]
     else:
         raise ValueError('exactly one or two sets of epochs must be given.')
@@ -134,7 +136,10 @@ def get_erp_sem(epochs, n_iterations, sample_size=None, verifiplot=True, ax=None
         window = kwargs.pop('window')
         if ax is None:
             f, ax = plt.subplots(figsize=(8, 3), tight_layout=True)
-        erps.plot(ax=ax, c='C0', alpha=0.01, legend=False)
+        erps.plot(ax=ax, c='C0', alpha=0.002, legend=False)
+        if len(epochs)==2:
+            erp0.mean(axis=1).plot(ax=ax, c='C1', lw=2)
+            erp1.mean(axis=1).plot(ax=ax, c='C2', lw=2)
         ax.scatter(scores.PL, scores.PA, s=1, c='k')
         ax.set_xlabel('time (s)')
         ax.set_ylabel('voltage ($\mu V$)')

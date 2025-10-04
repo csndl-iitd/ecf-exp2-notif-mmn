@@ -1,58 +1,63 @@
-participant_id,age ,is_controlled_block,gender,profession,b1_deviant,b2_deviant,b3_deviant,comments,SN_tone,Tone_delay
-sd011,30,N,M,PG_acd,SN,BT,,FT10 noisy channel  interpolated and further re reference ,Hello_inMoto,0.00861678
-sd012,25,N,M,PG_acd,SN,BT,,No bad channel,Whoop_doop,0.036575964
-sd013,25,N,M,PG_acd,SN,BT,,TP10 noisy channel  interpolated and further re reference ,Hello_inMoto,0.00861678
-sd014,28,N,M,PG_acd,SN,BT,,bad electrode = None Bad subject only very few epochs remains Discard as per recommended,droplet,0.034829932
-sd015,31,N,M,PG_acd,SN,BT,,bad electrode = None,realme_fun,0.006780045
-sd016,28,N,M,PG_acd,SN,BT,,,Whoop_doop,0.036575964
-sd017,25,N,M,PG_acd,SN,BT,,,spaceline,0.006485261
-sd018,28,N,M,PG_acd,SN,BT,,,Hello_inMoto,0.00861678
-sd019,25,N,M,PG_acd,SN,BT,,,iphone_note,0.001927438
-sd020,26,N,M,PG_acd,SN,BT,, ,oneplustune,0.031428571
-sd021,25,N,M,PG_acd,SN,BT,,,voyar,0.006689342
-sd022,20,N,M,UG_acd,SN,BT,,,realme_fun,0.006780045
-sd023,18,N,M,UG_acd,SN,BT,,,realme_fun,0.006780045
-sd024,22,N,M,UG_acd,SN,BT,,,oneplus_meet,0.011836735
-sd025,19,N,M,UG_acd,SN,BT,, ,oneplus_blissful,0.007210884
-sd026,18,N,M,UG_acd,SN,BT,,,spaceline,0.006485261
-sd027,21,N,M,UG_acd,SN,BT,,,oneplustune,0.031428571
-sd028,18,N,M,UG_acd,SN,BT,,,iphone_note,0.001927438
-sd029,21,N,M,UG_acd,SN,BT,,,realme,0.009365079
-sd030,21,N,M,UG_acd,SN,BT,,,encounter_vivo,0.00814059
-sd031,21,N,M,UG_acd,SN,BT,,,iphone_note,0.001927438
-sd032,22,N,F,UG_acd,SN,BT,,,droplet,0.034829932
-sd033,34,N,M,non_acd,SN,BT, ,,oneplustune,0.031428571
-sd034,27,N,F,PG_acd,SN,BT,,,vibration,0.19755102
-sd035,28,Y,F,PG_acd,SN,CN,BT,,iphone_note,0.001927438
-sd036,34,Y,M,non_acd,SN,CN,BT,,Whoop_doop,0.036575964
-sd037,26,Y,M,non_acd,SN,CN,BT,,oppo,0.001292517
-sd038,25,Y,M,non_acd,SN,CN,BT,,Whoop_doop,0.036575964
-sd039,34,Y,M,non_acd,SN,CN,BT,,oppo_joy,0.071836735
-sd040,31,Y,M,non_acd,SN,CN,BT,,oppo_joy,0.071836735
-sd041,34,Y,M,non_acd,SN,CN,BT,,realme_fun,0.006780045
-sd042,38,Y,M,non_acd,SN,CN,BT,,encounter_vivo,0.00814059
-sd043,28,Y,M,PG_acd,SN,CN,BT,,iphone_note,0.001927438
-sd044,27,Y,M,PG_acd,SN,CN,BT,,droplet,0.034829932
-sd045,25,Y,F,PG_acd,SN,CN,BT,,iphone_note,0.001927438
-sd046,23,Y,F,UG_acd,SN,CN,BT,,spaceline,0.006485261
-sd047,26,Y,F,PG_acd,SN,CN,BT,,spaceline,0.006485261
-sd048,22,Y,F,UG_acd,SN,CN,BT,,Hello_inMoto,0.00861678
-sd049,22,Y,F,UG_acd,SN,CN,BT,,oneplus_meet,0.011836735
-sd050,21,Y,F,UG_acd,SN,CN,BT,,vibration,0.19755102
-sd051,23,Y,M,UG_acd,CN,SN,BT,,Whoop_doop,0.036575964
-sd052,24,Y,F,UG_acd,CN,SN,BT,,iphone_note,0.001927438
-sd053,23,Y,F,UG_acd,CN,SN,BT,,oppo,0.001292517
-sd054,23,Y,F,UG_acd,CN,SN,BT,,spaceline,0.006485261
-sd055,48,Y,M,non_acd,CN,SN,BT,,droplet,0.034829932
-sd056,24,Y,M,non_acd,CN,SN,BT,,Hello_inMoto,0.00861678
-sd057,20,Y,M,non_acd,CN,SN,BT,,jai_shree_shyam,0.014920635
-sd058,26,Y,M,non_acd,CN,SN,BT,,_andes_vivo,0.000975057
-sd059,20,Y,M,non_acd,CN,SN,BT,,vibration,0.19755102
-sd060,30,Y,M,non_acd,CN,SN,BT,,skyline_samsung,0.00292517
-sd061,22,Y,F,UG_acd,CN,SN,BT,,Hello_inMoto,0.00861678
-sd062,21,Y,M,UG_acd,CN,SN,BT,,oppo,0.001292517
-sd063,20,Y,M,UG_acd,CN,SN,BT,,spaceline,0.006485261
-sd064,25,Y,M,UG_acd,CN,SN,BT,,Hello_inMoto,0.00861678
-sd065,20,Y,M,UG_acd,CN,SN,BT,Indivisual  SN  ERP not good,iphone_note,0.001927438
-sd066,23,Y,M,UG_acd,CN,SN,BT,,chime_moto,0.010090703
-sd067,22,Y,F,UG_acd,CN,SN,BT,,Whoop_doop,0.036575964
+participant_id,age ,is_controlled_block,gender,profession,b1_deviant,b2_deviant,b3_deviant,comments,SN_tone,Tone_delay,,,,
+sd011,30,N,M,PG_acd,SN,BT,,FT10 noisy channel  interpolated and further re reference ,Hello_inMoto,0.00861678,,,,
+sd012,25,N,M,PG_acd,SN,BT,,No bad channel,Whoop_doop,0.036575964,,,,
+sd013,25,N,M,PG_acd,SN,BT,,TP10 noisy channel  interpolated and further re reference ,Hello_inMoto,0.00861678,,,,
+sd014,28,N,M,PG_acd,SN,BT,,bad electrode = None Bad subject only very few epochs remains Discard as per recommended,droplet,0.034829932,,,,
+sd015,31,N,M,PG_acd,SN,BT,,bad electrode = None,realme_fun,0.006780045,,,,
+sd016,28,N,M,PG_acd,SN,BT,,,Whoop_doop,0.036575964,,,,
+sd017,25,N,M,PG_acd,SN,BT,,,spaceline,0.006485261,,,,
+sd018,28,N,M,PG_acd,SN,BT,,,Hello_inMoto,0.00861678,,,,
+sd019,25,N,M,PG_acd,SN,BT,,,iphone_note,0.001927438,,,,
+sd020,26,N,M,PG_acd,SN,BT,,,oneplustune,0.031428571,,,,
+sd021,25,N,M,PG_acd,SN,BT,,,voyar,0.006689342,,,,
+sd022,20,N,M,UG_acd,SN,BT,,,realme_fun,0.006780045,,,,
+sd023,18,N,M,UG_acd,SN,BT,,,realme_fun,0.006780045,,,,
+sd024,22,N,M,UG_acd,SN,BT,,bad electrode = FT9,oneplus_meet,0.011836735,,,,
+sd025,19,N,M,UG_acd,SN,BT,, ,oneplus_blissful,0.007210884,,,,
+sd026,18,N,M,UG_acd,SN,BT,,,spaceline,0.006485261,,,,
+sd027,21,N,M,UG_acd,SN,BT,,,oneplustune,0.031428571,,,,
+sd028,18,N,M,UG_acd,SN,BT,,,iphone_note,0.001927438,,,,
+sd029,21,N,M,UG_acd,SN,BT,,,realme,0.009365079,,,,
+sd030,21,N,M,UG_acd,SN,BT,,,encounter_vivo,0.00814059,,,,
+sd031,21,N,M,UG_acd,SN,BT,,bad electrode = F3,iphone_note,0.001927438,,,,
+sd032,22,N,F,UG_acd,SN,BT,,bad electrode = None,droplet,0.034829932,,,,
+sd033,34,N,M,non_acd,SN,BT, ,bad electrode = None,oneplustune,0.031428571,,,,
+sd034,27,N,F,PG_acd,SN,BT,,,vibration,0.19755102,,,,
+sd035,28,Y,F,PG_acd,SN,CN,BT,bad electrode = None,iphone_note,0.001927438,,,,
+sd036,34,Y,M,non_acd,SN,CN,BT,bad electrode =AF7,Whoop_doop,0.036575964,,,,
+sd037,26,Y,M,non_acd,SN,CN,BT,bad electrode = None,oppo,0.001292517,,,,
+sd038,25,Y,M,non_acd,SN,CN,BT,bad electrode = None,Whoop_doop,0.036575964,,,,
+sd039,34,Y,M,non_acd,SN,CN,BT,bad electrode = None,oppo_joy,0.071836735,,,,
+sd040,31,Y,M,non_acd,SN,CN,BT,bad electrode =AF7,oppo_joy,0.071836735,,,,
+sd041,34,Y,M,non_acd,SN,BT,CN,"bad electrode = ['AF7', 'PO4', 'PO3', 'FT9', 'F2']",realme_fun,0.006780045,,,,
+sd042,38,Y,M,non_acd,SN,CN,BT,bad electrode = None,encounter_vivo,0.00814059,,,,
+sd043,28,Y,M,PG_acd,SN,CN,BT,,iphone_note,0.001927438,,,,
+sd044,27,Y,M,PG_acd,SN,CN,BT,"bad electrode =FT9, FC3",droplet,0.034829932,,,,
+sd045,25,Y,F,PG_acd,SN,CN,BT,bad electrode =PO4,iphone_note,0.001927438,,,,
+sd046,23,Y,F,UG_acd,SN,CN,BT,"bad electrode =['AF7', 'Fp1', 'F6', 'AF8', 'FC3', 'PO3', 'TP7', 'P5', 'PO7']",spaceline,0.006485261,,,,
+sd047,26,Y,F,PG_acd,SN,CN,BT,bad electrode = PO7,spaceline,0.006485261,,,,
+sd048,22,Y,F,UG_acd,SN,CN,BT,"bad electrode = AFz, CP5",Hello_inMoto,0.00861678,,,,
+sd049,22,Y,F,UG_acd,SN,CN,BT,bad electrode = None,oneplus_meet,0.011836735,,,,
+sd050,21,Y,F,UG_acd,CN,SN,BT,bad electrode = None,vibration,0.19755102,,,,
+sd051,23,Y,M,UG_acd,CN,SN,BT,bad electrode = None,Whoop_doop,0.036575964,,,,
+sd052,24,Y,F,UG_acd,CN,SN,BT,bad electrode = P7,iphone_note,0.001927438,,,,
+sd053,23,Y,F,UG_acd,CN,SN,BT,bad electrode = None,oppo,0.001292517,,,,
+sd054,23,Y,F,UG_acd,CN,SN,BT,bad electrode = FT9,spaceline,0.006485261,,,,
+sd055,48,Y,M,non_acd,CN,SN,BT,"bad electrode = FC3; Bad data , drop subject",droplet,0.034829932,,,,
+sd056,24,Y,M,non_acd,CN,SN,BT,bad electrode = None,Hello_inMoto,0.00861678,,,,
+sd057,20,Y,M,non_acd,CN,SN,BT,bad electrode = None,jai_shree_shyam,0.014920635,,,,
+sd058,26,Y,M,non_acd,CN,SN,BT," ['PO3', 'P6', 'F4', 'Oz', 'FT9'] Dropped ",_andes_vivo,0.000975057,,,,
+sd059,20,Y,M,non_acd,CN,SN,BT,bad electrode = P5,vibration,0.19755102,,,,
+sd060,30,Y,M,non_acd,CN,SN,BT,bad electrode = None,skyline_samsung,0.00292517,,,,
+sd061,22,Y,F,UG_acd,CN,SN,BT,"bad electrode = FC3; it have additional S24 ,S25 trgger reponse ",Hello_inMoto,0.00861678,,,,
+sd062,21,Y,M,UG_acd,CN,SN,BT,bad electrode = FT7,oppo,0.001292517,,,,
+sd063,20,Y,M,UG_acd,CN,SN,BT,bad electrode = FC3,spaceline,0.006485261,,,,
+sd064,25,Y,M,UG_acd,CN,SN,BT,bad electrode = FC4,Hello_inMoto,0.00861678,,,,
+sd065,20,Y,M,UG_acd,CN,SN,BT,Indivisual  SN  ERP not good,iphone_note,0.001927438,,,,
+sd066,23,Y,M,UG_acd,CN,SN,BT,bad electrode = Afz,chime_moto,0.010090703,,,,
+sd067,22,Y,F,UG_acd,CN,SN,BT,"bad electrode = CP5, Fp2, C1",Whoop_doop,0.036575964,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,     
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,, ,,,,,,
