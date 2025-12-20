@@ -62,11 +62,11 @@ def plot_erps(evoked_dict, picks, stylesdict, text_labels=None, title='', ylim=(
     axs.set_ylabel(ylabel)
     #axs.set_xticks(np.arange(0, time_range[1]*1000 + 100, 200))  # Ticks every 0.5 units
     #axs.set_yticks(np.arange(-1, 1.1, 0.2)) # Ticks every 0.2 units
-    axs.grid(which='major', linestyle='-')
+    # axs.grid(which='major', linestyle='-')
 
-    # Enable minor ticks and grid
-    axs.minorticks_on()
-    axs.grid(which='minor', linestyle=':')
+    # # Enable minor ticks and grid
+    # axs.minorticks_on()
+    # axs.grid(which='minor', linestyle=':')
     # Set consistent font sizes
     plt.rcParams.update({
         'xtick.labelsize': 18,
