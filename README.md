@@ -1,13 +1,9 @@
 
 ---
 
-## Title
-
-**Personalized Smartphone Notifications Bias Auditory Salience Across Processing Stages**
-
+## Title: Personalized Smartphone Notifications Bias Auditory Salience Across Processing Stages 
 **Authors:**
 Prakash Mishra, Tapan K. Gandhi, and Saurabh R. Gandhi
-
 
 ---
 
